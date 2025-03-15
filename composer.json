@@ -71,6 +71,9 @@
         }
     },
     "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.72",
+        "kubawerlos/php-cs-fixer-custom-fixers": "^3.23",
+        "phpstan/phpstan": "^2.1",
         "symfony/maker-bundle": "^1.62",
         "symfony/stopwatch": "7.2.*",
         "symfony/web-profiler-bundle": "7.2.*"

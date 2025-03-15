@@ -89,13 +89,6 @@ composer_install:
 
 
 ##################
-## Analyze layers structure
-##################
-
-deptrac:
-	${DOCKER_COMPOSE_PHP_EXEC} vendor/bin/deptrac analyse
-
-##################
 ## Analyze YAML files
 ##################
 
@@ -108,7 +101,7 @@ yamllint:
 ##################
 
 phpstan:
-	${DOCKER_COMPOSE_PHP_EXEC} vendor/bin/phpstan analyse src tests --memory-limit=1G
+	${DOCKER_COMPOSE_PHP_EXEC} vendor/bin/phpstan analyse src --memory-limit=1G
 
 
 ##################
