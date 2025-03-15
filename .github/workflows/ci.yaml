@@ -1,0 +1,51 @@
+name: Github CI Actions
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+jobs:
+  linter:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+      - name: Install dependencies via Composer
+        run: COMPOSER_NO_DEV=0 composer install
+
+      - name: CS-Fixer dry-run
+        run: php vendor/bin/php-cs-fixer fix src --dry-run    
+
+      - name: Yamllint
+        run: yamllint .
+        
+      - name: PHPStan analyse
+        run: php vendor/bin/phpstan analyse -c phpstan.neon        
+
+  # tests:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v4
+
+  #     - name: Install PHP
+  #       uses: shivammathur/setup-php@v2
+  #       with:
+  #         php-version: '8.3'
+
+  #     - name: Install dependencies via Composer
+  #       run: COMPOSER_NO_DEV=0 composer install
+
+  #     - name: Run PHPUnit with coverage
+  #       run: |
+  #         mkdir -p coverage
+  #         php vendor/bin/phpunit tests --coverage-text=coverage/clover.txt  --only-summary-for-coverage-text
+
+  #     - name: Print coverage summary report
+  #       run: cat coverage/clover.txt
