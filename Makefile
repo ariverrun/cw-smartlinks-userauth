@@ -143,3 +143,11 @@ tests_functional:
 
 jwt:
 	${DOCKER_COMPOSE_PHP_EXEC}  bin/console lexik:jwt:generate-keypair
+
+
+##################
+## App commands
+##################
+
+create_user:
+	${DOCKER_COMPOSE_PHP_EXEC}  bin/console app:user-create
